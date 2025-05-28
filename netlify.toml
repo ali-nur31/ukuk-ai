@@ -1,9 +1,21 @@
 [build]
   command = "npm install && npm run build"
-  functions = "built-lambda" # netlify-lambda builds to this folder AND Netlify reads functions from here
-  publish = "dist" # create-react-app builds to this folder, Netlify should serve all these files statically
+  publish = "dist"
+  functions = "built-lambda"
 
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Content-Type = "application/javascript"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Content-Type = "text/css"
+    Cache-Control = "public, max-age=31536000, immutable"
