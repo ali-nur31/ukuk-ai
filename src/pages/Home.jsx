@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/components/_home.scss';
 
+const AI_SERVICE_URL = import.meta.env.VITE_AI_SERVICE_URL || 'http://localhost:5001';
+
 const Home = () => {
     const [input, setInput] = useState('');
     const [freeQueriesLeft, setFreeQueriesLeft] = useState(3);
@@ -34,7 +36,7 @@ const Home = () => {
         const currentIndex = messages.length;
 
         try {
-            let endpoint = 'http://localhost:5001/query';
+            let endpoint = `${AI_SERVICE_URL}/query`;
             let headers = {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
