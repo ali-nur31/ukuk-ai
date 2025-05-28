@@ -1,0 +1,39 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.navbar {
+  background: #34495e;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &__links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    transition: color 0.3s;
+
+    &:hover {
+      color: #FF8A16;
+    }
+  }
+
+  &__user {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .user-greeting {
+    color: #FF8A16;
+  }
+
+  .logout-btn {
+    padding: 0.5rem 1.2rem;
+  }
+}

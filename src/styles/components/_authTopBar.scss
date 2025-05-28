@@ -1,0 +1,54 @@
+.auth-top-bar {
+  position: fixed;
+  top: 18px;
+  right: 32px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.auth-top-bar__login-btn {
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 22px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #1565c0;
+  }
+}
+
+.auth-top-bar__profile {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-top-bar__username {
+  color: #fff;
+  font-size: 1rem;
+  font-weight: 500;
+  background: #222;
+  border-radius: 16px;
+  padding: 6px 16px;
+}
+
+.auth-top-bar__logout-btn {
+  background: #e74c3c;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 7px 18px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.2s;
+  &:hover {
+    background: #c0392b;
+  }
+} 

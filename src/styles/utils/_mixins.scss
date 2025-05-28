@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use 'variables' as *;
+
+// Flexbox
+@mixin flex($direction: row, $justify: flex-start, $align: stretch) {
+    display: flex;
+    flex-direction: $direction;
+    justify-content: $justify;
+    align-items: $align;
+}
+
+// Grid
+@mixin grid($columns: 1, $gap: $spacing-md) {
+    display: grid;
+    grid-template-columns: repeat($columns, 1fr);
+    gap: $gap;
+}
+
+// Responsive
+@mixin respond-to($breakpoint) {
+    @if $breakpoint == sm {
+        @media (max-width: $breakpoint-sm) { @content; }
+    }
+    @else if $breakpoint == md {
+        @media (max-width: $breakpoint-md) { @content; }
+    }
+    @else if $breakpoint == lg {
+        @media (max-width: $breakpoint-lg) { @content; }
+    }
+    @else if $breakpoint == xl {
+        @media (max-width: $breakpoint-xl) { @content; }
+    }
+}
+
+// Dark mode
+@mixin dark-mode {
+    @media (prefers-color-scheme: dark) {
+        @content;
+    }
+}
+
+// Card
+@mixin card {
+    background: $bg-primary;
+    border-radius: $border-radius-md;
+    box-shadow: $shadow-sm;
+    padding: $spacing-lg;
+    transition: box-shadow $transition-normal;
+
+    &:hover {
+        box-shadow: $shadow-md;
+    }
+}
+
+// Button
+@mixin button($bg-color: $primary-color, $text-color: white) {
+    background-color: $bg-color;
+    color: $text-color;
+    border: none;
+    border-radius: $border-radius-sm;
+    padding: $spacing-sm $spacing-md;
+    cursor: pointer;
+    transition: background-color $transition-normal;
+
+    &:hover {
+        background-color: color.adjust($bg-color, $lightness: -10%);
+    }
+
+    &:disabled {
+        background-color: color.adjust($bg-color, $lightness: 20%);
+        cursor: not-allowed;
+    }
+}
+
+// Input
+@mixin input {
+    width: 100%;
+    padding: $spacing-sm;
+    border: 1px solid $border-color;
+    border-radius: $border-radius-sm;
+    font-size: 1rem;
+    transition: border-color $transition-normal;
+
+    &:focus {
+        outline: none;
+        border-color: $primary-color;
+    }
+}
+
+// Container
+@mixin container($max-width: 1200px) {
+    width: 100%;
+    max-width: $max-width;
+    margin: 0 auto;
+    padding: 0 $spacing-md;
+}
+
+@mixin button-style($bg-color) {
+  background: $bg-color;
+  color: $white;
+  border: none;
+  border-radius: $base-border-radius;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  padding: 0.8rem 1.5rem;
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
