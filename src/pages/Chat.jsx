@@ -4,8 +4,8 @@ import { getAllProfessionals, getAllUsers } from '../api';
 import axios from 'axios';
 import { io } from 'socket.io-client';
 
-const API_URL = 'http://localhost:5000/api';
-const SOCKET_URL = 'http://localhost:5000';
+const API_URL = 'https://polniy-bankich.onrender.com/api';
+const SOCKET_URL = 'https://polniy-bankich.onrender.com';
 
 const Chat = () => {
   const { user } = useAuth();
