@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:5000/api';
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 
 // Utility functions
 const checkUserRole = (requiredRole) => {
@@ -57,26 +57,21 @@ api.interceptors.request.use(config => {
 // Response interceptor
 api.interceptors.response.use(
     response => response,
-    async error => {
-        if (!error.response) {
-            return Promise.reject(error);
+    error => {
+        if (error.response) {
+            // The request was made and the server responded with a status code
+            // that falls out of the range of 2xx
+            console.error('Response error:', error.response.data);
+            throw new Error(error.response.data.message || 'An error occurred');
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error('Request error:', error.request);
+            throw new Error('No response from server');
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error:', error.message);
+            throw new Error('Request setup failed');
         }
-
-        if (error.response.status === 401 && !error.config._retry) {
-            error.config._retry = true;
-            try {
-                const token = localStorage.getItem('token');
-                const response = await axios.post(`${API_URL}/auth/refresh-token`, { token });
-                localStorage.setItem('token', response.data.token);
-                error.config.headers.Authorization = `Bearer ${response.data.token}`;
-                return axios(error.config);
-            } catch (refreshError) {
-                localStorage.removeItem('token');
-                window.location.href = '/login';
-                return Promise.reject(refreshError);
-            }
-        }
-        return Promise.reject(error);
     }
 );
 
