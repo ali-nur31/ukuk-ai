@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import '../styles/components/_home.scss';
-
-const AI_SERVICE_URL = import.meta.env.VITE_AI_SERVICE_URL || 'http://localhost:5001';
+const VITE_AI_SERVICE_URL = import.meta.env.VITE_AI_SERVICE_URL;
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 const Home = () => {
     const [input, setInput] = useState('');
@@ -36,14 +36,14 @@ const Home = () => {
         const currentIndex = messages.length;
 
         try {
-            let endpoint = `${AI_SERVICE_URL}/query`;
+            let endpoint = `${VITE_AI_SERVICE_URL}/query`;
             let headers = {
                 'Content-Type': 'application/json',
                 'Accept': 'application/json',
             };
 
             if (isAuthenticated) {
-                endpoint = 'http://localhost:5000/api/chat/query';
+                endpoint = `${VITE_API_URL}/chat/query`;
                 const token = localStorage.getItem('token');
                 if (token) {
                     headers['Authorization'] = `Bearer ${token}`;
